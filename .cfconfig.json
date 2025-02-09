@@ -19,7 +19,7 @@
                 }
             },
             "datasources" : {
-                "**DSOURCENAME**":{
+                "Luke_Davey":{
                     "database":"${PDBNAME}",
                     "driver":"mysql",
                     "host":"${PHOST}",
