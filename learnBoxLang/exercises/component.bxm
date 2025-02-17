@@ -3,3 +3,50 @@
 <p id="e7ab04f1-1f21-4c0c-aabd-078030b87b42" class=""><strong>Exercise</strong>: In the exercises folder, create a file <code>myComponent.bx</code> which is a class. In component.bxm, make a form
     that accepts 3 numbers. Create a form on this page which accepts 3 inputs.  When the form is submitted, send the three numbers to a function in myComponent.bx and
     display the product of the three numbers on the page.</p>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Component Example</title>
+</head>
+<body>
+    <bx:output>
+        <h2>Enter Three Numbers</h2>
+
+        <!-- Define myComponent from the class file -->
+        <bx:set myComponent = createObject("myComponent") />
+
+        <!-- Form Submission -->
+        <form action="#cgi.SCRIPT_NAME#?#cgi.QUERY_STRING#" method="post">
+            <div>
+                <label for="num1">First Number:</label>
+                <input type="number" id="num1" name="num1" required>
+            </div>
+
+            <div>
+                <label for="num2">Second Number:</label>
+                <input type="number" id="num2" name="num2" required>
+            </div>
+
+            <div>
+                <label for="num3">Third Number:</label>
+                <input type="number" id="num3" name="num3" required>
+            </div>
+
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+
+        <!-- Check if form was submitted and process the numbers -->
+      <bx:if condition="#structKeyExists(form, 'num1')#">
+            <h2>Result:</h2>
+            The product of the three numbers is:
+            <bx:output>#myComponent.multiplyThreeNumbers(form.num1, form.num2, form.num3)#</bx:output>
+        </bx:if>
+
+    </bx:output>
+</body>
+</html>
