@@ -4,31 +4,3 @@ Exercise: Using the function in the main article as a model, write a function th
 
 <hr />
 Exercise: Can you make a form that accepts two numbers, submits it to the same page and then uses the function to add the two numbers together? All the information you need is in these docs.
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Math Function Example</title>
-</head>
-<body>
-    <bx:output>
-        <h2>Function Output</h2>
-
-        <!-- Calling the multiplyNumbers function with different values -->
-        #multiplyNumbers(5,3)#<br/>
-        #multiplyNumbers(100,223)#<br/>
-        #multiplyNumbers(7,8)#<br/>
-        #multiplyNumbers(12,12)#<br/>
-        #multiplyNumbers(15,20)#<br/>
-
-        <!-- Function Definition -->
-        <bx:function name="multiplyNumbers" access="private" returntype="numeric">
-            <bx:argument name="firstnum" type="numeric">
-            <bx:argument name="secondnum" type="numeric">
-            <bx:return #firstnum * secondnum#>
-        </bx:function>
-
-    </bx:output>
-</body>
-</html>
