@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<bx:output>
+    <bx:param name="t" default="carousel" />
+</bx:output>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -17,7 +20,7 @@
 
     <main id="maincontent" class="row">
         <section id="center" class="col-sm-9 order-last">
-            <bx:include template="carousel.bxm" />
+            <bx:include template="#t#.bxm" />
         </section>
         
         <bx:include template="genrenav.bxm" />

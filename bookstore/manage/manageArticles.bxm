@@ -1,31 +1,52 @@
+<bx:output>
+<bx:param name="id" default="-1" />
+
+<bx:set common = createObject("bookstore.common.articles") />
+
+
 <bx:if form.keyExists("title")>
+   <bx:set allArticles = common.allArticles() />
     <bx:dump var="#form#" />
     <bx:param name="form.active" default="0" />
     <bx:set numericActive = (form.active == "on") ? 1 : 0 />
-    <bx:set common = createObject("bookstore.common.articles") />
     <bx:set common.saveArticle(form.title, form.body, numericActive) />
 </bx:if>
 
 Manage Articles
 
-<bx:output>
+    <div class="row>
+        <div class="col">
+           <ol>
+                <li><a href="#cgi.script_name#?id=0">Create New Article</a></li>
+                <bx:loop query="allArticles">
+                <li><a href="#cgi.script_name#?id=#id#">#title#</a></li>
+                </bx:loop>
+        </ol>
+        </div>
+        <div class="col">
 
-    <form action="#cgi.script_name#" method="POST">
-    <div class="form-floating mb-3">
-        <input type="text" name="title" class="form-control" id="title" placeholder="Title">
-        <label for="title">Title</label>
+        <bx:if id gt -1>
+            <bx:set articleDetails = common.articleById(id) />
+            <form action="#cgi.script_name#" method="POST">
+            <input name="id" value="#accountDetails.id#" />
+            <div class="form-floating mb-3">
+            <input type="text" name="title" class="form-control" id="title" placeholder="Title" value="#accountDetails.title#">
+            <label for="title">Title</label>
+            </div>
+
+            <div class="form-floating mb-3">
+            <textarea class="form-control" id="body" name="body" value="#accountDetails.description#" placeholder="Body" style="height: 150px"></textarea>
+            <label for="body">Body</label>
+            </div>
+
+            <div class="form-check mb-3">
+            <input type="checkbox" name="active" value="1" class="form-check-input" id="active" #articleDetails.status==1 ? "checked" : ""#>
+            <label class="form-check-label" for="active">Active</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </bx:if>
+        </div>
     </div>
-
-    <div class="form-floating mb-3">
-        <textarea class="form-control" id="body" name="body" placeholder="Body" style="height: 150px"></textarea>
-        <label for="body">Body</label>
-    </div>
-
-    <div class="form-check mb-3">
-        <input type="checkbox" name="active" value="1" class="form-check-input" id="active">
-        <label class="form-check-label" for="active">Active</label>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Save</button>
-    </form>
 </bx:output>
