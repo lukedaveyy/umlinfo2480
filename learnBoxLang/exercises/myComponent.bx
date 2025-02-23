@@ -1,8 +1,5 @@
 class {
-    function multiplyTheNumbers(
-            required numeric firstnum,
-            required numeric secondnum,
-            required numeric thirdnum) {
-        return firstnum * secondnum * thirdnum;
+    function multiplyThreeNumbers(required numeric firstNum, required numeric secondNum, required numeric thirdNum){
+        return firstNum * secondNum * thirdNum;
     }
 }

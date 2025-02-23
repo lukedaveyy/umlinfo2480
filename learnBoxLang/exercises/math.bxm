@@ -1,2 +1,24 @@
-<p><strong>Exercise:</strong>Make an ordered list ( using the ol and li tags ). For each item, output a math problem using 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Math Operations in BoxLang</title>
+</head>
+<body>
+    <p><strong>Exercise:</strong>Make an ordered list ( using the ol and li tags ). For each item, output a math problem using 
     each operator least once and two numbers between 1 and 9 ( i.e. 1+9=????? ).</p>
+
+    <bx:output>
+        <h2>Math Operations in BoxLang</h2>
+        <ol>
+            <li>1 + 9 = #1+9#</li>
+            <li>7 - 3 = #7-3#</li>
+            <li>8 / 4 = #8/4#</li>
+            <li>6 * 2 = #6*2#</li>
+            <li>9 mod 2 = #9 mod 2#</li>
+            <li>3 ^ 3 = #3^3#</li>
+        </ol>
+    </bx:output>
+</body>
+</html>
