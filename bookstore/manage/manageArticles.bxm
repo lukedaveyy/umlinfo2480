@@ -1,4 +1,3 @@
-<bx:output>
 <bx:param name="id" default="-1" />
 
 <bx:set common = createObject("bookstore.common.articles") />
@@ -49,4 +48,3 @@ Manage Articles
         </bx:if>
         </div>
     </div>
-</bx:output>

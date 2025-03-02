@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<bx:output>
-    <bx:param name="t" default="carousel" />
-</bx:output>
+
+<bx:param name="t" default="carousel" />
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -15,7 +15,6 @@
 <div id="wrapper" class="container">
 
     <bx:include template="header.bxm" />
-
     <bx:include template="horizontalnav.bxm" />
 
     <main id="maincontent" class="row">
