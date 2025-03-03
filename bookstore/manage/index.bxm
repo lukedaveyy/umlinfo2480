@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<bx:param name="t" default="manageArticles" />
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -17,7 +18,7 @@
     <main id="maincontent" class="row">
         <section id="center" class="col-sm-12 order-last">
             <bx:include template="/bookstore/public/carousel.bxm" />
-            <bx:include template="/bookstore/manage/manageArticles.bxm" />
+            <bx:include template="/bookstore/manage/#t#.bxm" />
         </section>
         
         <bx:include template="/bookstore/public/genrenav.bxm" />

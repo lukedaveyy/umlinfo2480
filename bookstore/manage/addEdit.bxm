@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<bx:param name="isbn13" default="" />
+
+<bx:set common = createObject("bookstore.common.books") />
+
+<!-- Fetch all books for side navigation -->
+<bx:set allBooks = common.searchBooks() />
+
+<!-- Fetch book details if ISBN13 is provided -->
+<bx:set bookDetails = (len(trim(isbn13)) ? common.searchBooks(isbn13) : "") />
+
+<bx:if form.keyExists("title")>
+    <bx:set numericYear = isNumeric(form.year) ? form.year : 0 />
+    <bx:set numericWeight = isNumeric(form.weight) ? form.weight : 0 />
+    <bx:set numericPages = isNumeric(form.pages) ? form.pages : 0 />
+
+    <bx:set common.saveBook(form.title, form.ISBN13, form.ISBN, numericYear, numericWeight, numericPages) />
+</bx:if>
+
+<h2>Manage Books</h2>
+
+<div class="row">
+    <!-- Side Navigation (Book List) -->
+    <div class="col-3">
+        <ol>
+            <li><a href="#cgi.script_name#">Create New Book</a></li>
+            <bx:loop query="allBooks">
+                <li><a href="#cgi.script_name#?isbn13=#ISBN13#">#title#</a></li>
+            </bx:loop>
+        </ol>
+    </div>
+
+    <!-- Form for Adding/Editing Books -->
+    <div class="col-9">
+        <form action="#cgi.script_name#" method="POST">
+            <input type="hidden" name="isbn13" value="#bookDetails.ISBN13#" />
+
+            <div class="form-floating mb-3">
+                <input type="text" name="title" class="form-control" id="title" placeholder="Title" value="#bookDetails.title#">
+                <label for="title">Title</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" name="ISBN13" class="form-control" id="ISBN13" placeholder="ISBN13" value="#bookDetails.ISBN13#">
+                <label for="ISBN13">ISBN-13</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" name="ISBN" class="form-control" id="ISBN" placeholder="ISBN" value="#bookDetails.ISBN#">
+                <label for="ISBN">ISBN</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="number" name="year" class="form-control" id="year" placeholder="Year" value="#bookDetails.year#">
+                <label for="year">Year</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="number" step="0.01" name="weight" class="form-control" id="weight" placeholder="Weight" value="#bookDetails.weight#">
+                <label for="weight">Weight (kg)</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="number" name="pages" class="form-control" id="pages" placeholder="Pages" value="#bookDetails.pages#">
+                <label for="pages">Pages</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+</html>

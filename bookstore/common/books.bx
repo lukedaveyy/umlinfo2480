@@ -1,0 +1,41 @@
+class {
+    function saveBook( 
+        required string title="", 
+        required string ISBN13="", 
+        required string ISBN="", 
+        required numeric year=0, 
+        required numeric weight=0, 
+        required numeric pages=0 
+    ){
+        queryExecute("
+            INSERT INTO books (id, title, ISBN13, ISBN, year, weight, pages) 
+            VALUES (:id, :title, :ISBN13, :ISBN, :year, :weight, :pages) 
+            ON DUPLICATE KEY UPDATE 
+            title = :title, 
+            ISBN13 = :ISBN13, 
+            ISBN = :ISBN, 
+            year = :year, 
+            weight = :weight, 
+            pages = :pages
+        ",{
+            title: arguments.title,
+            ISBN13: arguments.ISBN13,
+            ISBN: arguments.ISBN,
+            year: arguments.year,
+            weight: arguments.weight,
+            pages: arguments.pages
+        });
+    }
+
+    function searchBooks( string searchTerm="", numeric status=-1 ){
+        var extra = "";
+        var params = {};
+
+        if( len(trim(searchTerm)) ) {
+            extra = "WHERE title LIKE :searchTerm OR ISBN13 LIKE :searchTerm";
+            params["searchTerm"] = "%" & searchTerm & "%";
+        }
+
+        return queryExecute("SELECT * FROM books #extra#", params);
+    }
+}

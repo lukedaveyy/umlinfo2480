@@ -2,7 +2,7 @@
 <html lang="en">
 
 <bx:param name="t" default="carousel" />
-
+<bx:set bookstoreFunctions = createObject("bookstore.common.books") />
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
