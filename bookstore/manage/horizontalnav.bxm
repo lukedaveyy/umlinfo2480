@@ -2,12 +2,7 @@
 
 <bx:set articles = createObject("bookstore.common.articles") />
 <bx:set allArticles = articles.allArticles( status=1) />
-<bx:output query="allarticles">
-</bx:output>
 
-    <li class="nav-item">
-        <a class="nav-link" href="#cgi.script_name#?id=#id#&t=articles">#title#</a>
-    </li>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">
             <img src="/bookstore/public/images/rdb.png" alt="Read Dees Books Logo"/>
