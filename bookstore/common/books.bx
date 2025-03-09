@@ -27,15 +27,23 @@ class {
         });
     }
 
-    function searchBooks( string searchTerm="", numeric status=-1 ){
-        var extra = "";
-        var params = {};
+function searchBooks( string searchTerm="", numeric status=-1 ){
+    var whereClauses = [];
+    var params = {};
 
-        if( len(trim(searchTerm)) ) {
-            extra = "WHERE title LIKE :searchTerm OR ISBN13 LIKE :searchTerm";
-            params["searchTerm"] = "%" & searchTerm & "%";
-        }
-
-        return queryExecute("SELECT * FROM books #extra#", params);
+    if( len(trim(searchTerm)) ) {
+        whereClauses.append("title LIKE :searchTerm OR ISBN13 LIKE :searchTerm");
+        params["searchTerm"] = "%" & trim(searchTerm) & "%";
     }
+
+    if( status >= 0 ) {
+        whereClauses.append("status = :status");
+        params["status"] = status;
+    }
+
+    var whereSQL = arrayLen(whereClauses) ? "WHERE " & arrayToList(whereClauses, " AND ") : "";
+
+    return queryExecute("SELECT * FROM books " & whereSQL, params);
+}
+
 }
