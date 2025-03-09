@@ -46,4 +46,8 @@ function searchBooks( string searchTerm="", numeric status=-1 ){
     return queryExecute("SELECT * FROM books " & whereSQL, params);
 }
 
+function uploadFile( fileField ){
+   return fileUpload(expandPath("/bookstore/common/images/"),"uploadImage","*","makeUnique");
+}
+
 }

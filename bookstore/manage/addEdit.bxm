@@ -14,8 +14,10 @@
     <bx:set numericYear = isNumeric(form.year) ? form.year : 0 />
     <bx:set numericWeight = isNumeric(form.weight) ? form.weight : 0 />
     <bx:set numericPages = isNumeric(form.pages) ? form.pages : 0 />
-
     <bx:set common.saveBook(form.title, form.ISBN13, form.ISBN, numericYear, numericWeight, numericPages) />
+    <bx:set fileInfo = common.uploadFile("uploadImage") />
+    <bx:set form.image = fileInfo.serverFileName />
+
 </bx:if>
 
 <h2>Manage Books</h2>
@@ -33,7 +35,7 @@
 
     <!-- Form for Adding/Editing Books -->
     <div class="col-9">
-        <form action="#cgi.script_name#" method="POST">
+<form action="#cgi.script_name#?tool=addEdit&book=#book#" method="POST" enctype="multipart/form-data" >
             <input type="hidden" name="isbn13" value="#bookDetails.ISBN13#" />
 
             <div class="form-floating mb-3">
@@ -66,12 +68,46 @@
                 <label for="pages">Pages</label>
             </div>
 
+            <input type=”file” name=”uploadimage”>     
+<input type=”hidden” name=”image” value=”#trim(bookinfo.image[1])#”>
+<label for="uploadImage">Upload Cover</label>
+<div class="input-group mb-3">    
+    <input type="file" id="uploadImage" name="uploadimage" class="form-control" />    
+  </div>
+
+            <div class="form-floating mb-3">
+    <textarea id="description" name="description" class="form-control" >
+        #bookinfo.description#
+    </textarea>
+</div>
+
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>
 </div>
 
+ <script>
+            const {
+                ClassicEditor,
+                Essentials,
+                Bold,
+                Italic,
+                Font,
+                Paragraph
+            } = CKEDITOR;
 
+            ClassicEditor
+                .create( document.querySelector( '#description' ), {
+                    licenseKey: '<eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NzMxMDA3OTksImp0aSI6IjRkOTYwYTU2LTA4NTktNDY5Ny1hYzA5LWIzOWIzMjQzZTAxYiIsImxpY2Vuc2VkSG9zdHMiOlsiMTI3LjAuMC4xIiwibG9jYWxob3N0IiwiMTkyLjE2OC4qLioiLCIxMC4qLiouKiIsIjE3Mi4qLiouKiIsIioudGVzdCIsIioubG9jYWxob3N0IiwiKi5sb2NhbCJdLCJ1c2FnZUVuZHBvaW50IjoiaHR0cHM6Ly9wcm94eS1ldmVudC5ja2VkaXRvci5jb20iLCJkaXN0cmlidXRpb25DaGFubmVsIjpbImNsb3VkIiwiZHJ1cGFsIl0sImxpY2Vuc2VUeXBlIjoiZGV2ZWxvcG1lbnQiLCJmZWF0dXJlcyI6WyJEUlVQIl0sInZjIjoiNDIxNDUwZjUifQ.jboUb7-Rq50yESdlNWFa_mzBGHOQ7W0pJ9c5P_ppJ85KMz3qU7pFzC5PPDvtQkvO0ljB-j_sqvIn4U6DouC8xA>',
+                    plugins: [ Essentials, Bold, Italic, Font, Paragraph ],
+                    toolbar: [
+                        'undo', 'redo', '|', 'bold', 'italic', '|',
+                        'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
+                    ]
+                } )
+                .then( /* ... */ )
+                .catch( /* ... */ );
+        </script>
 
 
 </html>
