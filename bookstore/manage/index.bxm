@@ -17,11 +17,8 @@
 
     <main id="maincontent" class="row">
         <section id="center" class="col-sm-12 order-last">
-            <bx:include template="/bookstore/public/carousel.bxm" />
             <bx:include template="/bookstore/manage/#t#.bxm" />
         </section>
-        
-        <bx:include template="/bookstore/public/genrenav.bxm" />
     </main>
 
     <bx:include template="/bookstore/public/footer.bxm" />

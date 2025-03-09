@@ -1,5 +1,5 @@
 class {
-        function saveArticle( required string title="", required string description="", numeric status=0 ){
+    function saveArticle( required string title="", required string description="", numeric status=0, id="" ){
         queryExecute("
             INSERT into articles (id, title, description, status) 
             VALUES (:id,:title, :description, :status) 
@@ -8,16 +8,17 @@ class {
         ",{
             title:arguments.title,
             description:arguments.description,
-            status: arguments.status
+            status: arguments.status,
+            id: arguments.id
         });
     }
 
-            function allArticles( numeric status=-1 ){
+    function allArticles( numeric status=-1 ){
         var extra = status > -1 ? "where status=#status#" : "";
         return queryExecute("SELECT * FROM articles #extra#");
     }
 
-          function articleById( required numeric id){
+    function articleById( required numeric id){
         return queryExecute("SELECT * FROM articles where id=:id",{id:arguments.id});
     }  
 
